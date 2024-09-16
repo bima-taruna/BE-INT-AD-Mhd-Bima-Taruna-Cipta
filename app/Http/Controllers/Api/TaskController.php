@@ -44,7 +44,7 @@ class TaskController extends Controller
         $validator = Validator::make($request->all(), [
             'judul' => 'required|string|max:100',
             'deskripsi' => 'required|string',
-            'selesai' => 'required|boolean'
+            'selesai' => 'boolean'
         ]);
 
 
@@ -55,7 +55,7 @@ class TaskController extends Controller
         $task = Task::create([
             'judul' => $request->judul,
             'deskripsi' => $request->deskripsi,
-            'selesai' => $request->selesai,
+            'selesai' => $request->has('selesai') ? $request->selesai : false,
             'user_id' => auth()->id(),
         ]);
 
